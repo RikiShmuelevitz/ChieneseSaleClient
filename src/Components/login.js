@@ -8,13 +8,33 @@ import { useNavigate } from 'react-router-dom';           //core css
 //import "primeicons/primeicons.css";  
 import { Button } from 'primereact/button';
 import { Container } from '@mui/material';
+import { useSelector, useDispatch } from "react-redux";
+import {setSCurrentStudent} from '../store/studentSlice/studentAction'
+
 
 export default function Login() {
     const[password,setPassword]=useState("")
+    let isExist=false;
+    const studentsList = useSelector((state) => state.students.studentsList);
+
+
     const navigate=useNavigate();
+    const dispatch = useDispatch();
+
     const login=()=>{
-        console.log("password: ",password)
-        navigate("/addDonation")
+      studentsList.forEach(element => {
+        if(element.password==password){
+          dispatch(setSCurrentStudent(element.studentId))
+          isExist=true;
+        }
+      
+      });
+    if(isExist)
+    navigate("/addDonation")
+    else
+      alert("הסיסמא שהקשת אינה נמצאת במערכת. הקישי סיסמא שונה.")
+    
+       
     }
 
   return (
