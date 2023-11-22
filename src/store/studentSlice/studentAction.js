@@ -15,8 +15,8 @@ export function getAllStudents(data){
     return {type:'initStudents', payload:data}
 }
 
-export function setStudentsAmount(studentId,amount){
-    return {type:'updateStusentsAmount', payload:{studentId:studentId,amount:amount}}
+export function setStudentsSum(sum){
+    return {type:'setStudentsSum', payload:sum}
 }
 export function setSCurrentStudent(studentId){
     return {type:'setSCurrentStudent', payload:studentId}

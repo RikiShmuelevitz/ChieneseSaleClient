@@ -1,13 +1,13 @@
 import { produce } from "immer";
  const initialState={
     studentsList:[ 
-        {studentId:123,lastName:"shir",firstName:"rachel",classId:"11",password:"1234",studentAmount:0},
-        {studentId:124,lastName:"shir",firstName:"shira",classId:"11",password:"123",studentAmount:0},
-        {studentId:125,lastName:"shalom",firstName:"rut",classId:"12",password:"12",studentAmount:0},
+        {studentId:123,lastName:"כהן",firstName:"רות",classId:"11",password:"1234",studentSum:0},
+        {studentId:124,lastName:"shir",firstName:"shira",classId:"11",password:"123",studentSum:0},
+        {studentId:125,lastName:"shalom",firstName:"rut",classId:"12",password:"12",studentSum:0},
 
 
     ],
-    currentStudent:{studentId:0,lastName:" ",firstName:" ",classId:" ",password:" ",studentAmount:0}
+    currentStudent:{studentId:0,lastName:" ",firstName:" ",classId:" ",password:" ",studentSum:0}
 
 
     
@@ -30,8 +30,10 @@ import { produce } from "immer";
         case 'initStudents':
            state.studentsList=action.payload;
            break;
-        case 'setStudentsAmount':
-        state.studentsList[action.payload.studentId].studentAmount+=action.payload.num 
+        case 'setStudentsSum':
+        state.currentStudent.studentSum+=Number(action.payload)
+        console.log("sunApter: ", state.currentStudent.studentSum)
+        //console.log( " state.studentsList[action.payload.studentId].studentAmount: ",  state.studentsList[action.payload.studentId].studentAmount)
         break;
         case 'setSCurrentStudent':
             state.currentStudent=state.studentsList?.find(s=>s.studentId==action.payload )

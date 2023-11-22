@@ -10,7 +10,8 @@ import { Button } from 'primereact/button';
 import { Container } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import {setSCurrentStudent} from '../store/studentSlice/studentAction'
-
+import { InputText } from 'primereact/inputtext';
+import '../csses/login.css'
 
 export default function Login() {
     const[password,setPassword]=useState("")
@@ -39,12 +40,12 @@ export default function Login() {
 
   return (
     <>
-    <div className="field col-12 md:col-4">
+    <div className="field col-12 md:col-4"  id="divLogin">
         <label>לכניסה הקישי קוד אישי</label><br/>
         {/* אם יהיה זמן לעשות שעובר דף בלחיצה על אנטר */}
-      
-       <Password  id="password" toggleMask onChange={(e)=>setPassword(e.target.value)}/><br/>
-       <Button label="הכנס" className="p-button-raised p-button-secondary" onClick={()=>login()} /><br/>
+        <InputText type="password"  id="password" toggleMask onChange={(e)=>setPassword(e.target.value)}/><br/>
+       {/* <Password  id="password" toggleMask onChange={(e)=>setPassword(e.target.value)}/><br/> */}
+       <Button label="הכנסי" className="p-button-raised p-button-secondary" onClick={()=>login()} /><br/>
         
 
 

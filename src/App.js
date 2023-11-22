@@ -6,6 +6,7 @@ import Points from './Components/points';
 import Router from './Components/router';
 import { useDispatch} from 'react-redux';
 import{initStudents}from'./store/studentSlice/studentAction'
+import logo from './logo.png';
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
     <AddDonation/>
     <Donation/>
     <Points/> */}
+    {/* <img src={logo}></img> */}
     <Router/>
   </>)
 }
