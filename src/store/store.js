@@ -1,10 +1,11 @@
 import { combineReducers, createStore } from "redux"
 import { studenReducer } from "./studentSlice/studentSlice";
-
+import { donationReducer } from "./donationSlice/donationSlice";
 
 const reducer=combineReducers(
     {
-            students:studenReducer
+            students:studenReducer,
+            donations:donationReducer
     }
 )
 

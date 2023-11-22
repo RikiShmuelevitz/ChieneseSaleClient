@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import '../csses/donationForm.css'
 import { RadioButton } from "primereact/radiobutton";
 import Gifts from "./gifts";
-import { Button } from "@mui/material";
+import { Button } from 'primereact/button';
+
 
 export default function DonationForm(){
 
@@ -20,6 +21,7 @@ export default function DonationForm(){
     }
     return(<>
         <form>
+            <label style={{direction:"rtl"}}>פרטי תורם</label>
             <InputText placeholder="שם פרטי"></InputText>
             <InputText placeholder="שם משפחה"></InputText>
             <InputText placeholder="כתובת"></InputText>
@@ -36,10 +38,27 @@ export default function DonationForm(){
                     );
                 })}
             </div><br/>
-            {!isGift&&
-            <Button onClick={()=>setIsGift(!isGift)} >הראה מתנות</Button>}
+                  {/* <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">אמצעי תשלום</FormLabel>
+            <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="מזומן"
+                name="radio-buttons-group"
+            >
+            <FormControlLabel value="מזומן" control={<Radio />} label="מזומן" />
+            <FormControlLabel value="צק" control={<Radio />} label="צק" />
+            <FormControlLabel value="אשראי" control={<Radio />} label="אשראי" />
+            </RadioGroup>
+            </FormControl> */}
+            <h3>פרטי אשראי</h3>
+                    <InputText placeholder=" פרטי אשראי" variant="outlined" />
+                    <InputText placeholder="ספרות בגב הכרטיס 3" variant="outlined" />
+                    <InputText placeholder="תוקף " variant="outlined" />
+                    <InputText  placeholder="תעודת זהות" variant="outlined" /><br/>
+                    {!isGift&&
+            <Button className="p-button-raised p-button-secondary" label="הראה מתנות" onClick={()=>setIsGift(!isGift)} ></Button>}
             {isGift&&
-            <Button onClick={()=>setIsGift(!isGift)} >הסתר מתנות</Button>}
+            <Button className="p-button-raised p-button-secondary" label="הסתר מתנות" onClick={()=>setIsGift(!isGift)} ></Button>}
             {isGift&&<Gifts/>}       
             <p>סך הכל לתשלום {sum} ש"ח</p>
 
