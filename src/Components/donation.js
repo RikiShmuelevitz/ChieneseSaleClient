@@ -27,6 +27,8 @@ export default function Donation(){
     const [value, setValue] = useState();
     const [isRecepie, setIsRecepie] = useState(false);
     const [isChek, setIsChek] = useState(false);
+    const [isEnterDonation, setIsEnterDonation] = useState(false);
+
 
     const options = ['כן','לא'];
     const categories = [
@@ -51,12 +53,8 @@ export default function Donation(){
           
         }
     }
-    // const handleSubmit = (event) => {
-    //     event.preventDefault(); // זה מונע מהטופס לשלוח בצורה דיפולטיבית      
-    
-
-    //   };
-    const saveDetails=()=>{
+    const handleSubmit = (event) => {
+        event.preventDefault(); 
 
         let sId=student.studentId
         // console.log("sId: ",sId)
@@ -76,13 +74,22 @@ export default function Donation(){
 
         dispatch(addDonation({donationId:1,studentId:sId,MOP:mop,donorName:dName,Recepies:rec,sum:sum}))
        dispatch(setStudentsSum(sum));
+       setIsEnterDonation(false)
 
-    }    
+       sId=0
+       mop=''
+       rec=''
+       sum=0
+       event.target.reset();
+  
+
+      };
+   
     return(<>
-        <form  >
+        <form onSubmit={handleSubmit} >
                 <h2>פרטי התרומה</h2>
                     <InputText id="inputtext" placeholder="שם התורם" ref={donorNameRef} /><br/>
-                    <InputText type="number" id="inputtext" placeholder="סכום התרומה"  ref={sumRef} />
+                    <InputText type="number" id="inputtext" placeholder="סכום התרומה"  ref={sumRef} required/>
               
                 <div className="flex flex-column gap-3" id="paymentType">
                     <label className="labelOption" htmlFor="inputtext">אמצעי תשלום </label>
@@ -112,7 +119,7 @@ export default function Donation(){
                  */}
                 <br/>
                 <label className="labelOption">מעוניינת בקבלה סעיף 46</label><br/>
-                <SelectButton value={value} onChange={(e) => recepie(e)} options={options} onClick={()=>setIsChek(true)}   ref={isRecepieRef} /><br/>
+                <SelectButton value={value} onChange={(e) => recepie(e)} options={options} onClick={(e)=>recepie(e)}   ref={isRecepieRef} /><br/>
                 {
                     isChek&&<p>גשי עם הצק לגיזברות בימים:    בין השעות:</p>
                 }
@@ -122,8 +129,17 @@ export default function Donation(){
                     </>
                 }
                 <br/>
-                <Button type="button" label="הכנס תרומה" className="p-button-raised p-button-secondary"  onClick={()=>saveDetails()}/><br/>
-                <Button label="תרומה חדשה" className="p-button-raised p-button-secondary"/><br/>
+                {/* <Button type="submit" label="הכנס תרומה" className="p-button-raised p-button-secondary"  /><br/> */}
+                {/* <Button type="submit" label="הכנס תרומה" className="p-button-raised p-button-secondary"  onClick={()=>saveDetails()}/><br/> */}
+
+                <Button type="button" label="הכנס תרומה" className="p-button-raised p-button-secondary" onClick={()=>setIsEnterDonation(true)}/><br/>
+                {isEnterDonation&&
+                <div>
+                    <p>האם את בטוחה שברצונך להכניס את התרומה שהזנת?</p>
+                <Button type="submit" label="אישור" className="p-button-raised p-button-secondary"  /><br/>
+                <Button label="ביטול " className="p-button-raised p-button-secondary" onClick={()=>setIsEnterDonation(false)}/><br/>
+                </div>
+                }
                 <Button label="סיימתי לעדכן" className="p-button-raised p-button-secondary" onClick={(e)=>{navigate("/points")}}/>
               
         </form>  
